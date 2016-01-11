@@ -10,6 +10,7 @@
 #include "stm32f10x_tim.h"
 
 #include "wsConfig.h"
+
 #if WS_USE_LED_DETECT > 0
 /*
  * Cortex-M3 debug register
