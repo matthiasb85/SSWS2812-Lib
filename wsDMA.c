@@ -15,7 +15,7 @@ static  DMA_InitTypeDef _wsDMA_PayLoadInit;
 void wsDMA_Init(void * pSrc,void *pDest, uint32_t DataLen)
 {
 
-	/* Enable DMA1 clock */
+	/* Enable WS_DMA_CHANNEL clock */
 	WS_DMA_RCC_CMD(WS_DMA_RCC_PERIPH, ENABLE);
 
 	DMA_DeInit(WS_DMA_CHANNEL);
@@ -32,10 +32,10 @@ void wsDMA_Init(void * pSrc,void *pDest, uint32_t DataLen)
 	_wsDMA_PayLoadInit.DMA_M2M = DMA_M2M_Disable;
 	_wsDMA_PayLoadInit.DMA_Mode = DMA_Mode_Circular;
 
-	/* DMA1 Channel6 Config */
+	/* WS_DMA_CHANNEL Config */
 	DMA_Init(WS_DMA_CHANNEL, &_wsDMA_PayLoadInit);
 
-	/* DMA1 Channel6 enable */
+	/* WS_DMA_CHANNEL enable */
 	DMA_Cmd(WS_DMA_CHANNEL, ENABLE);
 
 }
