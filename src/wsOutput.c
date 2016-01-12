@@ -62,7 +62,9 @@ static void _ws_RCC_Init(void)
 {
   /* GPIO clock enable */
   WS_OUTPUT_DA_RCC_CMD(WS_OUTPUT_DA_RCC_PERIPH, ENABLE);
+#if WS_USE_POWER_ENABLE > 0
   WS_OUTPUT_PE_RCC_CMD(WS_OUTPUT_PE_RCC_PERIPH, ENABLE);
+#endif
 #if WS_USE_LED_DETECT > 0
   WS_OUTPUT_DT_RCC_CMD(WS_OUTPUT_DT_RCC_PERIPH, ENABLE);
 #endif
@@ -84,10 +86,12 @@ static void _ws_GPIO_Init(void)
   GPIO_InitStructure.GPIO_Pin = WS_OUTPUT_DA_PIN;
   GPIO_Init(WS_OUTPUT_DA_PORT, &GPIO_InitStructure);
 
+#if WS_USE_POWER_ENABLE > 0
   /* PE as power enable */
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
   GPIO_InitStructure.GPIO_Pin = WS_OUTPUT_PE_PIN;
   GPIO_Init(WS_OUTPUT_PE_PORT, &GPIO_InitStructure);
+#endif
 
 #if WS_USE_LED_DETECT > 0
   /* DT for LED detection */
@@ -132,13 +136,17 @@ void _wsOutput_State(FunctionalState State)
 }
 void wsOutput_Enable()
 {
-  GPIO_WriteBit(WS_OUTPUT_PE_PORT, WS_OUTPUT_PE_PIN, Bit_RESET);
+#if WS_USE_POWER_ENABLE > 0
+  GPIO_WriteBit(WS_OUTPUT_PE_PORT, WS_OUTPUT_PE_PIN, WS_OUTPUT_PE_ON);
+#endif
   _wsOutput_State(ENABLE);
 }
 
 void wsOutput_Disable()
 {
-  GPIO_WriteBit(WS_OUTPUT_PE_PORT, WS_OUTPUT_PE_PIN, Bit_SET);
+#if WS_USE_POWER_ENABLE > 0
+  GPIO_WriteBit(WS_OUTPUT_PE_PORT, WS_OUTPUT_PE_PIN, WS_OUTPUT_PE_OFF);
+#endif
   _wsOutput_State(DISABLE);
 }
 

@@ -25,6 +25,7 @@
 /* Toplevel USE flags */
 #define WS_USE_LED_DETECT           1      /* Detect number of LEDs automatically, connect WS_OUTPUT_DT_PIN to DO of the last LED */
 #define WS_USE_DOUBLE_BUF           0      /* Use double buffering if you have problems with aliasing                             */
+#define WS_USE_POWER_ENABLE         1      /* Use a power enable pin to drive the LEDs with a FET or bipolar transistor           */
 #define WS_COLOR_ORDER              1      /* Depend on WS2812 version -> 0 RGB, 1 GRB                                            */
 #define WS_MAXNUMOFLEDS             (100)  /* Maximum number of supported LEDs                                                    */
 
@@ -58,6 +59,10 @@
  * WS_OUTPUT:
  * Configuration for wsOutput.c
  */
+
+/*
+ * Timer
+ */
 #define WS_OUTPUT_TIM               TIM3
 #define WS_OUTPUT_TIM_RCC_CMD       RCC_APB1PeriphClockCmd
 #define WS_OUTPUT_TIM_RCC_PERIPH    RCC_APB1Periph_TIM3
@@ -68,19 +73,36 @@
 #define WS_OUTPUT_TIM_OC_PLOAD_CMD  TIM_OC1PreloadConfig
 #define WS_OUTPUT_TIM_SET_CMP_CMD   TIM_SetCompare1
 
+/*
+ * Data Output
+ */
 #define WS_OUTPUT_DA_PORT           GPIOA
 #define WS_OUTPUT_DA_PIN            GPIO_Pin_6
 #define WS_OUTPUT_DA_RCC_CMD        RCC_APB2PeriphClockCmd
 #define WS_OUTPUT_DA_RCC_PERIPH     RCC_APB2Periph_GPIOA
 
+/*
+ * AFIO Peripheral
+ */
 #define WS_OUTPUT_AFIO_RCC_CMD      RCC_APB2PeriphClockCmd
 #define WS_OUTPUT_AFIO_RCC_PERIPH   RCC_APB2Periph_AFIO
 
+/*
+ * Power Enable
+ */
+#if WS_USE_POWER_ENABLE > 0
 #define WS_OUTPUT_PE_PORT           GPIOA
 #define WS_OUTPUT_PE_PIN            GPIO_Pin_7
 #define WS_OUTPUT_PE_RCC_CMD        RCC_APB2PeriphClockCmd
 #define WS_OUTPUT_PE_RCC_PERIPH     RCC_APB2Periph_GPIOA
+#define WS_OUTPUT_PE_DIR_INVERTED   1
+#define WS_OUTPUT_PE_ON             ((WS_OUTPUT_PE_DIR_INVERTED == 0) ? Bit_SET : Bit_RESET)
+#define WS_OUTPUT_PE_OFF            ((WS_OUTPUT_PE_DIR_INVERTED == 0) ? Bit_RESET : Bit_SET)
+#endif
 
+/*
+ * Feedback Pin for LED detection
+ */
 #if WS_USE_LED_DETECT > 0
 #define WS_OUTPUT_DT_PORT           GPIOA
 #define WS_OUTPUT_DT_PIN            GPIO_Pin_8
