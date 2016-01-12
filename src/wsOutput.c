@@ -128,7 +128,7 @@ static void _ws_Timer_Init(void)
 void _wsOutput_State(FunctionalState State)
 {
 	/* WS_OUTPUT_TIM enable/disable DMA Req */
-	TIM_DMACmd(WS_OUTPUT_TIM, TIM_DMA_CC1, State);
+	TIM_DMACmd(WS_OUTPUT_TIM, WS_OUTPUT_TIM_DMA_CH, State);
 }
 void wsOutput_Enable()
 {
