@@ -29,27 +29,27 @@ static  DMA_InitTypeDef _wsDMA_PayLoadInit;
 void wsDMA_Init(void * pSrc,void *pDest, uint32_t DataLen)
 {
 
-	/* Enable WS_DMA_CHANNEL clock */
-	WS_DMA_RCC_CMD(WS_DMA_RCC_PERIPH, ENABLE);
+  /* Enable WS_DMA_CHANNEL clock */
+  WS_DMA_RCC_CMD(WS_DMA_RCC_PERIPH, ENABLE);
 
-	DMA_DeInit(WS_DMA_CHANNEL);
-	DMA_StructInit(&_wsDMA_PayLoadInit);
-	_wsDMA_PayLoadInit.DMA_PeripheralBaseAddr = (uint32_t)pDest;
-	_wsDMA_PayLoadInit.DMA_MemoryBaseAddr = (uint32_t)pSrc;
-	_wsDMA_PayLoadInit.DMA_DIR = DMA_DIR_PeripheralDST;
-	_wsDMA_PayLoadInit.DMA_BufferSize = DataLen;
-	_wsDMA_PayLoadInit.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-	_wsDMA_PayLoadInit.DMA_MemoryInc = DMA_MemoryInc_Enable;
-	_wsDMA_PayLoadInit.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
-	_wsDMA_PayLoadInit.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
-	_wsDMA_PayLoadInit.DMA_Priority = DMA_Priority_High;
-	_wsDMA_PayLoadInit.DMA_M2M = DMA_M2M_Disable;
-	_wsDMA_PayLoadInit.DMA_Mode = DMA_Mode_Circular;
+  DMA_DeInit(WS_DMA_CHANNEL);
+  DMA_StructInit(&_wsDMA_PayLoadInit);
+  _wsDMA_PayLoadInit.DMA_PeripheralBaseAddr = (uint32_t)pDest;
+  _wsDMA_PayLoadInit.DMA_MemoryBaseAddr = (uint32_t)pSrc;
+  _wsDMA_PayLoadInit.DMA_DIR = DMA_DIR_PeripheralDST;
+  _wsDMA_PayLoadInit.DMA_BufferSize = DataLen;
+  _wsDMA_PayLoadInit.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+  _wsDMA_PayLoadInit.DMA_MemoryInc = DMA_MemoryInc_Enable;
+  _wsDMA_PayLoadInit.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+  _wsDMA_PayLoadInit.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
+  _wsDMA_PayLoadInit.DMA_Priority = DMA_Priority_High;
+  _wsDMA_PayLoadInit.DMA_M2M = DMA_M2M_Disable;
+  _wsDMA_PayLoadInit.DMA_Mode = DMA_Mode_Circular;
 
-	/* WS_DMA_CHANNEL Config */
-	DMA_Init(WS_DMA_CHANNEL, &_wsDMA_PayLoadInit);
+  /* WS_DMA_CHANNEL Config */
+  DMA_Init(WS_DMA_CHANNEL, &_wsDMA_PayLoadInit);
 
-	/* WS_DMA_CHANNEL enable */
-	DMA_Cmd(WS_DMA_CHANNEL, ENABLE);
+  /* WS_DMA_CHANNEL enable */
+  DMA_Cmd(WS_DMA_CHANNEL, ENABLE);
 
 }
