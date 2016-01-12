@@ -23,16 +23,16 @@
 #define WSCONFIG_H_
 
 /* Toplevel USE flags */
-#define WS_USE_LED_DETECT			      1		   /* Detect number of LEDs automatically, connect WS_OUTPUT_DT_PIN to DO of the last LED */
-#define WS_USE_DOUBLE_BUF			      0		   /* Use double buffering if you have problems with aliasing                             */
-#define WS_COLOR_ORDER				      1		   /* Depend on WS2812 version -> 0 RGB, 1 GRB                                            */
+#define WS_USE_LED_DETECT           1      /* Detect number of LEDs automatically, connect WS_OUTPUT_DT_PIN to DO of the last LED */
+#define WS_USE_DOUBLE_BUF           0      /* Use double buffering if you have problems with aliasing                             */
+#define WS_COLOR_ORDER              1      /* Depend on WS2812 version -> 0 RGB, 1 GRB                                            */
 #define WS_MAXNUMOFLEDS             (100)  /* Maximum number of supported LEDs                                                    */
 
 /*
  * Two empty leds are enough to generate a synchgap
  * Final buffersizes can be calculated based on the number of leds
  */
-#define WS_SYNCHFILLER				      (2)
+#define WS_SYNCHFILLER              (2)
 #define WS_MAX_BUF_LEN              (WS_MAXNUMOFLEDS + WS_SYNCHFILLER)
 #define WS_BUF_LEN                  (sizeof(WS_LED_BITFIELD_T)*(WS_NumOfLeds + WS_SYNCHFILLER))
 
