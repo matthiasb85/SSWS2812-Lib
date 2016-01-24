@@ -6,7 +6,7 @@ PWM + DMA based driver for WS2812 LEDs
 * Top level API in wsLED.h
 * Designed for STM32F1xx microcontroller with the appropiate Std.Periph Lib.
 * Output port can be adjusted via wsConfig.h
-* NO IRQs are used in this driver, the DMA cicular mode and the synch gap is included in the led bit buffer
+* NO IRQs are used in this driver, the DMA uses the cicular mode and the synch gap is included in the led bit buffer
 * The led count can be adjusted in wsConfig.h or detected automatically
 
 ```C
