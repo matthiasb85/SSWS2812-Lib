@@ -47,16 +47,25 @@ typedef enum
   WS_COL_ALL
 }WS_COL_ID_T;
 
+#if WS_BIT_ZERO > 255 || WS_BIT_ONE > 255
+#warning "Try to avoid WS_BIT_ZERO > 255 || WS_BIT_ONE > 255 in order to decrease RAM usage!"
+typedef uint16_t WS_DMA_BIT_SIZE_T;
+#define WS_DMA_TRANSFER_T DMA_MemoryDataSize_HalfWord
+#else
+typedef uint8_t WS_DMA_BIT_SIZE_T;
+#define WS_DMA_TRANSFER_T DMA_MemoryDataSize_Byte
+#endif
+
 typedef struct
 {
 #if WS_COLOR_ORDER == 0
-  uint16_t Red[8];
-  uint16_t Green[8];
-  uint16_t Blue[8];
+  WS_DMA_BIT_SIZE_T Red[8];
+  WS_DMA_BIT_SIZE_T Green[8];
+  WS_DMA_BIT_SIZE_T Blue[8];
 #elif WS_COLOR_ORDER == 1
-  uint16_t Green[8];
-  uint16_t Red[8];
-  uint16_t Blue[8];
+  WS_DMA_BIT_SIZE_T Green[8];
+  WS_DMA_BIT_SIZE_T Red[8];
+  WS_DMA_BIT_SIZE_T Blue[8];
 #endif
 }WS_LED_BITFIELD_T;
 

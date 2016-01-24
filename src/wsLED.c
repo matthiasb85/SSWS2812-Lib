@@ -227,6 +227,6 @@ void wsLED_Init(void)
   WS_NumOfLeds = WS_MAXNUMOFLEDS;
 #endif
 
-  wsDMA_Init((void *)wsLED_BitBuffer, (void *)WS_OUTPUT_TIM_CCR,(WS_BUF_LEN/sizeof(uint16_t)));
+  wsDMA_Init((void *)wsLED_BitBuffer, (void *)WS_OUTPUT_TIM_CCR,(WS_BUF_LEN/sizeof(WS_DMA_BIT_SIZE_T)));
   wsOutput_Disable();
 }

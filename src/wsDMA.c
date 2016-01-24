@@ -23,6 +23,7 @@
 #include "stm32f10x_dma.h"
 #include "stm32f10x_rcc.h"
 #include "wsConfig.h"
+#include "wsTypes.h"
 
 static  DMA_InitTypeDef _wsDMA_PayLoadInit;
 
@@ -41,7 +42,7 @@ void wsDMA_Init(void * pSrc,void *pDest, uint32_t DataLen)
   _wsDMA_PayLoadInit.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
   _wsDMA_PayLoadInit.DMA_MemoryInc = DMA_MemoryInc_Enable;
   _wsDMA_PayLoadInit.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
-  _wsDMA_PayLoadInit.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
+  _wsDMA_PayLoadInit.DMA_MemoryDataSize = WS_DMA_TRANSFER_T;
   _wsDMA_PayLoadInit.DMA_Priority = DMA_Priority_High;
   _wsDMA_PayLoadInit.DMA_M2M = DMA_M2M_Disable;
   _wsDMA_PayLoadInit.DMA_Mode = DMA_Mode_Circular;
